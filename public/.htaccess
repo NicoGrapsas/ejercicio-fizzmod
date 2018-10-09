@@ -1,0 +1,12 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+#AuthName "Fizzmod Test"
+#AuthType Basic
+#AuthUserFile /var/www/html/A91FPwoOXcgLhbvZ/backend/.htpasswd
+#AuthGroupFile /dev/null
+#require valid-user

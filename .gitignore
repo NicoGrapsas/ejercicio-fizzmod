@@ -1,4 +1,3 @@
-.htaccess
 .htpasswd
 vendor/
 composer.lock
