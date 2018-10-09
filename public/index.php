@@ -4,15 +4,11 @@ require('../bootstrap/app.php');
 
 use App\Product;
 
-$DB = $app->DB();
+$app->route('GET /products/@id', 'ProductController@find');
+$app->route('GET /products/@id/enable', 'ProductController@enable');
+$app->route('GET /products/@id/disable', 'ProductController@disable');
 
-$product = new Product($DB);
-
-$product->fromJson(file_get_contents('../public/products.json'));
-$product->save();
-// var_dump($product->findById(0));
-// var_dump($product->all(0));
-
+$app->start();
 
 
 

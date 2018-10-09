@@ -36,36 +36,71 @@ abstract class Model {
 
     // function __set() {}
 
+    
+    /**
+     * Returns all rows from table.
+     * 
+     * @return array
+     */
     function all() {
         $result = $this->conn->query("SELECT * FROM $this->table");
         return $result->fetch_assoc();
     }
 
-    function findById($id) {
+    /**
+     * Return row matching id.
+     * 
+     * @param int
+     * @return array
+     */
+    function findById(int $id) {
         $result = $this->conn->query("SELECT * FROM $this->table WHERE id=$id");
         return $result->fetch_assoc();
     }
 
     function fromJson($data) {
         $this->json = json_decode($data);
+        foreach ($this->json as $row) {
+            var_dump($row);
+        }
         return $this;
     }
 
-    function buildColumns() {
+    /**
+     * Return columns string. Example: '(col1, col2, col3)'.
+     * 
+     * @return string
+     */
+    function buildColumns(): string {
         $columns = array_keys($this->columns);
         return '(' . implode(', ', $columns) . ')'; 
     }
 
-    function buildReplaces() {
+    /**
+     * Return replaces string. Example: '(?, ?, ?)'.
+     * 
+     * @return string
+     */
+    function buildReplaces(): string {
         $replaces = array_fill(0, count($this->columns), '?');
         return '(' . implode(', ', $replaces) . ')';
     }
 
-    function buildTypes() {
+    /**
+     * Return types string for binding param. Example: 'sss'.
+     * 
+     * @return string
+     */
+    function buildTypes(): string {
         $types = array_values($this->columns);
         return implode('', $types);
     }
 
+    /**
+     * Return values for binding param. Example: [value1, value2, value3]
+     * 
+     * @return array
+     */
     function buildValues() {
         $values = array_map(function($var) {
             if (isset($this->$var)) { return $this->$var; }
@@ -73,6 +108,10 @@ abstract class Model {
         return $values;
     }
     
+    /**
+     * Saves current model data to database.
+     * 
+     */
     final function save() {
         $columns = $this->buildColumns();
         $replaces = $this->buildReplaces();
