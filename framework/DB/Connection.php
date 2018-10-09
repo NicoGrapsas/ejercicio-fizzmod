@@ -13,8 +13,6 @@ class Connection extends \mysqli {
         );
     }
 
-
-
 }
 
 ?>

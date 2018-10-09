@@ -4,15 +4,6 @@ namespace Fizzmod\DB;
 
 abstract class Model {
 
-    protected $row;
-
-    /**
-     * JSON representation of the model.
-     * 
-     * @var object
-     */
-    protected $json;
-
     /**
      * Table name.
      * 
@@ -58,14 +49,6 @@ abstract class Model {
         return $result->fetch_assoc();
     }
 
-    function fromJson($data) {
-        $this->json = json_decode($data);
-        foreach ($this->json as $row) {
-            var_dump($row);
-        }
-        return $this;
-    }
-
     /**
      * Return columns string. Example: '(col1, col2, col3)'.
      * 
@@ -102,8 +85,9 @@ abstract class Model {
      * @return array
      */
     function buildValues() {
-        $values = array_map(function($var) {
-            if (isset($this->$var)) { return $this->$var; }
+        $values = [];
+        array_map(function($var) use (&$values) {
+            if (isset($this->$var)) { $values[] = $this->$var; }
         }, array_keys($this->columns));
         return $values;
     }
@@ -113,15 +97,26 @@ abstract class Model {
      * 
      */
     final function save() {
+        
+        $values = $this->buildValues();
+        
+        if (!$values) { throw new \Exception("Trying save empty model.", 1); }
+        
         $columns = $this->buildColumns();
         $replaces = $this->buildReplaces();
         $query = $this->conn->prepare("INSERT INTO $this->table $columns VALUES $replaces");
         
         $types = $this->buildTypes();
-        $values = $this->buildValues();
         $query->bind_param($types, ...$values);
 
         $query->execute();
+
+        if ($query->errno) { throw new \Exception($query->error, 1); }
+
+    }
+
+    function truncate() {
+        $this->conn->query("TRUNCATE $this->table");
     }
 
 }
