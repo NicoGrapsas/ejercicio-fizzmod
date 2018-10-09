@@ -35,7 +35,7 @@ abstract class Model {
      */
     function all() {
         $result = $this->conn->query("SELECT * FROM $this->table");
-        return $result->fetch_assoc();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     /**

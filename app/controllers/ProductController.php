@@ -10,6 +10,13 @@ class ProductController {
         $this->app = $app;
     }
 
+    function all() {
+        $product = new Product($this->app->DB());
+        $result = $product->all();
+        
+        return $this->app->json($result);
+    }
+
     function find(int $id) {
         $product = new Product($this->app->DB());
         $result = $product->findById($id);
