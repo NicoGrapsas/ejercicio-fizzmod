@@ -12,16 +12,28 @@ class ProductController {
 
     function find(int $id) {
         $product = new Product($this->app->DB());
-        $this->app->json($product->findById($id));
+        $result = $product->findById($id);
+        
+        if (!$result) { return $this->app->json(['error' => "Producto (id: $id) no encontrado"]); }
+        
+        return $this->app->json($result);
     }
 
     function enable(int $id) {
         $product = new Product($this->app->DB());
+        $result = $product->findById($id);
+
+        if (!$result) { return $this->app->json(['error' => "Producto (id: $id) no encontrado"]); }
+        
         return $product->enable($id);
     }
 
     function disable(int $id) {
         $product = new Product($this->app->DB());
+        $result = $product->findById($id);
+
+        if (!$result) { return $this->app->json(['error' => "Producto (id: $id) no encontrado"]); }
+
         return $product->disable($id);
     }
 
