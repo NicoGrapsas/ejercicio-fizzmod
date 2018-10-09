@@ -2,12 +2,10 @@
 
 namespace Fizzmod\DB;
 
-class DBConnection {
-
-    private $conn;
+class Connection extends \mysqli {
 
     function __construct($dbconfig) {
-        $this->conn = new \mysqli(
+        parent::__construct(
             $dbconfig['host'], 
             $dbconfig['username'], 
             $dbconfig['password'], 

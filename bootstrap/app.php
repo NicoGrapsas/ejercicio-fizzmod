@@ -16,7 +16,6 @@ $dbconfig = App::loadConfig('database');
 
 $app = new App();
 
-$app->register('DB', 'Fizzmod\DB\DBConnection', array($dbconfig));
-
+$app->register('DB', 'Fizzmod\DB\Connection', array($dbconfig));
 
 ?>

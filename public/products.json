@@ -1,0 +1,23 @@
+[
+ {
+ 	"id": "1",
+ 	"name": "TV Samsung 40",
+ 	"price": 5000.99
+ },{
+ 	"id": "2",
+ 	"name": "TV Samsung 32",
+ 	"price": 3400.99
+ },{
+ 	"id": "3",
+ 	"name": "Notebook Dell",
+ 	"price": 7000
+ },{
+ 	"id": "4",
+ 	"name": "Hamburguesas Caseras",
+ 	"price": 45
+ },{
+ 	"id": "5",
+ 	"name": "Monitor LG",
+ 	"price": 2799.99
+ }
+]

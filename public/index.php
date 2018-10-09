@@ -2,10 +2,20 @@
 
 require('../bootstrap/app.php');
 
+use App\Product;
+
 $DB = $app->DB();
 
-echo $app->get('time');
+$product = new Product($DB);
 
-var_dump($DB);
+$product->fromJson(file_get_contents('../public/products.json'));
+$product->save();
+// var_dump($product->findById(0));
+// var_dump($product->all(0));
+
+
+
+
+
 
 ?>
