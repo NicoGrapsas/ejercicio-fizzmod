@@ -6,7 +6,13 @@ use flight\Engine;
 
 class App extends Engine {
 
-    static function listFiles($dir, $withExtension=false) {
+    /**
+     * Return files in dir without '.' & '..'
+     *
+     * @param string
+     * @param boolean
+     */
+    static function listFiles($dir, $withExtension=false): array {
         $files = array_diff(scandir($dir), array('..', '.'));
         
         if (!$withExtension) {
@@ -18,10 +24,20 @@ class App extends Engine {
         return $files;
     }
     
+    /**
+     * Loads configuration file.
+     * 
+     * @param string
+     */
     static function loadConfig($file) {
         return include("../config/$file.php");
     }
 
+    /**
+     * Loads and register configuration files.
+     * 
+     * @param string
+     */
     function loadControllers($dir) {
         $controllers = App::listFiles($dir);
         foreach ($controllers as $controller) {
@@ -29,6 +45,14 @@ class App extends Engine {
         }
     }
 
+    /**
+     * Override default route function.
+     * Callback can be in the form of 'Controller@function'
+     * 
+     * @param string
+     * @param string|array
+     * 
+     */
     function route($path, $callback) {
         if (gettype($callback) == 'string') {
             [$controller, $function] = explode('@', $callback);
