@@ -68,5 +68,6 @@ $app = new App();
 
 $app->register('DB', 'Fizzmod\DB\Connection', array(App::loadConfig('database')));
 $app->loadControllers('../app/controllers');
+$app->set('flight.views.path', '../views');
 
 ?>
