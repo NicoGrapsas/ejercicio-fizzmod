@@ -41,10 +41,12 @@
 
 		</tbody>
 	</table>
-
 </div>
 
-	<script src="/js/jquery-3.3.1.min.js"></script>
-	<script src="/js/app.js"></script>
+<a id="github-link" href="https://github.com/NicoGrapsas/ejercicio-fizzmod">Github</a>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/app.js"></script>
+
 </body>
 </html>
