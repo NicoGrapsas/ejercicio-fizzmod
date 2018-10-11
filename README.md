@@ -5,9 +5,9 @@
 - Composer (https://getcomposer.org/)
 
 ## Instalacion:
-`"git clone https://github.com/NicoGrapsas/ejercicio-fizzmod.git" ProjectName`
-`"cd ProjectName"`
-`"composer install"
+`"git clone https://github.com/NicoGrapsas/ejercicio-fizzmod.git" ProjectName`  
+`"cd ProjectName"`  
+`"composer install"  
 ##### Configuracion Apache:
  - DocumentRoot debe apuntar a la carpeta public.
  - AllowOverride All
