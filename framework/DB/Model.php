@@ -104,7 +104,7 @@ abstract class Model {
         
         $columns = $this->buildColumns();
         $replaces = $this->buildReplaces();
-        $query = $this->conn->prepare("INSERT INTO $this->table $columns VALUES $replaces");
+        $query = $this->conn->prepare("REPLACE INTO $this->table $columns VALUES $replaces");
         
         $types = $this->buildTypes();
         $query->bind_param($types, ...$values);

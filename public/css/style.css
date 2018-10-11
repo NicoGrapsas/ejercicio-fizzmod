@@ -1,0 +1,9 @@
+#result-table {
+    width: 400px;
+    text-align: left;
+}
+
+#result-body .far {
+    cursor: pointer;
+}
+
